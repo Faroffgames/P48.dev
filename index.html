@@ -1,83 +1,89 @@
 <html>
-    <body> 
-        
+    <body>
         <div class="form1">
-            <form action=""></form>
+            <form action="" id="requestForm">
                 <div class="textboxes">
                     <label for="name">Name:</label><br>
-                    <input type="text" id="name" name="name"><br>   
+                    <input type="text" id="name" name="name"><br>
                     <label for="contact">Discord, Email, or Phone:</label><br>
-                    <input type="text" id="discord" name="discord"><br>             
+                    <input type="text" id="contact" name="contact"><br>
                 </div>
                 <div class="multipleoption">
-                        
+                    <select id="request" name="request">
+                        <option value="blog">Blog</option>
+                        <option value="game website">Game Website</option>
+                        <option value="music">Music</option>
+                        <option value="Social Networking">Social Networking Site</option>
+                        <option value="about us">About Us</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <select id="hosting" name="hosting">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
                 </div>
                 <div class="submit">
                     <input type="submit">
                 </div>
-            
+            </form>
         </div>
-       <style>
+        <style>
+        </style>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                // Function to handle form submission
+                $('#requestForm').submit(function(event) {
+                    event.preventDefault();
 
+                    // Gather form data
+                    var name = $('#name').val();
+                    var contact = $('#contact').val();
+                    var hosting = $('#hosting').val();
+                    var request = $('#request').val();
 
-       </style>
-      <script> 
-     // Function to handle form submission
-     $('#requestForm').submit(function(event) {
-            event.preventDefault();
+                    // Create payload to send to Discord webhook
+                    var payload = {
+                        "content": "New Form Request",
+                        "embeds": [{
+                            "title": "Form Details",
+                            "fields": [
+                                {
+                                    "name": "name",
+                                    "value": name
+                                },
+                                {
+                                    "name": "contact",
+                                    "value": contact
+                                },
+                                {
+                                    "name": "hosting",
+                                    "value": hosting
+                                },
+                                {
+                                    "name": "Request",
+                                    "value": request
+                                }
+                            ]
+                        }]
+                    };
 
-            // Gather form data
-            var name = $('#name').val();
-            var discord = $('#discord').val();
-            var payment = $('#hosting').val();
-            var request = $('#request').val();
-
-
-            // Create payload to send to Discord webhook
-            var payload = {
-                "content": "New Website Request",
-                "embeds": [{
-                    "title": "Website Request Details",
-                    "fields": [
-                        {
-                            "name": "name", //name obv
-                            "value": name
+                    // Send payload to Discord webhook
+                    $.ajax({
+                        type: 'POST',
+                        url: 'https://discord.com/api/webhooks/1121551311775727626/YIYMGcTAxZXoEUxjejKGlLdzxF57CfgXH0tNBoHFwNd20oi-rw945V5rbjhNCE6uzDTr',
+                        data: JSON.stringify(payload),
+                        contentType: 'application/json',
+                        success: function() {
+                            alert('Form submitted successfully!');
+                            $('#requestForm')[0].reset();
                         },
-                        {
-                            "name": "discord", //discord to contact
-                            "value": discord
-                        },
-                       
-                        {
-                            "name": "hosting", //payment method which is either paypal credit or debit
-                            "value": hosting
-                        },
-                        {
-                            "name": "request", //description for what the user wants
-                            "value": request
+                        error: function() {
+                            alert('An error occurred while submitting the form.');
                         }
-            
-                        
-                    ]
-                }]
-            };
-
-            // Send payload to Discord webhook
-            
-            $.ajax({
-                type: 'POST',
-                url: 'https://discord.com/api/webhooks/1121551311775727626/YIYMGcTAxZXoEUxjejKGlLdzxF57CfgXH0tNBoHFwNd20oi-rw945V5rbjhNCE6uzDTr',
-                data: JSON.stringify(payload),
-                contentType: 'application/json',
-                success: function() {
-                    alert('Form submitted successfully! We will contact you soon!');
-                    $('#requestForm')[0].reset();
-                },
-                error: function() {
-                    alert('An error occurred while submitting the form.');
-                }
+                    });
+                });
             });
-        });</script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        </script>
     </body>
 </html>
