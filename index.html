@@ -1,0 +1,83 @@
+<html>
+    <body> 
+        
+        <div class="form1">
+            <form action=""></form>
+                <div class="textboxes">
+                    <label for="name">Name:</label><br>
+                    <input type="text" id="name" name="name"><br>   
+                    <label for="contact">Discord, Email, or Phone:</label><br>
+                    <input type="text" id="discord" name="discord"><br>             
+                </div>
+                <div class="multipleoption">
+                        
+                </div>
+                <div class="submit">
+                    <input type="submit">
+                </div>
+            
+        </div>
+       <style>
+
+
+       </style>
+      <script> 
+     // Function to handle form submission
+     $('#requestForm').submit(function(event) {
+            event.preventDefault();
+
+            // Gather form data
+            var name = $('#name').val();
+            var discord = $('#discord').val();
+            var payment = $('#hosting').val();
+            var request = $('#request').val();
+
+
+            // Create payload to send to Discord webhook
+            var payload = {
+                "content": "New Website Request",
+                "embeds": [{
+                    "title": "Website Request Details",
+                    "fields": [
+                        {
+                            "name": "name", //name obv
+                            "value": name
+                        },
+                        {
+                            "name": "discord", //discord to contact
+                            "value": discord
+                        },
+                       
+                        {
+                            "name": "hosting", //payment method which is either paypal credit or debit
+                            "value": hosting
+                        },
+                        {
+                            "name": "request", //description for what the user wants
+                            "value": request
+                        }
+            
+                        
+                    ]
+                }]
+            };
+
+            // Send payload to Discord webhook
+            
+            $.ajax({
+                type: 'POST',
+                url: 'https://discord.com/api/webhooks/1121551311775727626/YIYMGcTAxZXoEUxjejKGlLdzxF57CfgXH0tNBoHFwNd20oi-rw945V5rbjhNCE6uzDTr',
+                data: JSON.stringify(payload),
+                contentType: 'application/json',
+                success: function() {
+                    alert('Form submitted successfully! We will contact you soon!');
+                    $('#requestForm')[0].reset();
+                },
+                error: function() {
+                    alert('An error occurred while submitting the form.');
+                }
+            });
+        });</script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </body>
+</html>
