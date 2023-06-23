@@ -5,11 +5,12 @@
                 <div class="textboxes">
                     <label for="name">Name:</label><br>
                     <input type="text" id="name" name="name"><br>
-                    <label for="contact">Discord, Email, or Phone:</label><br>
+                    <label for="contact">Discord:</label><br>
                     <input type="text" id="contact" name="contact"><br>
                 </div>
                 <div class="multipleoption">
                     <select id="request" name="request">
+                        <option value="" selected>Select Website Type:</option>
                         <option value="blog">Blog</option>
                         <option value="game website">Game Website</option>
                         <option value="music">Music</option>
@@ -17,7 +18,9 @@
                         <option value="about us">About Us</option>
                         <option value="other">Other</option>
                     </select>
+                    <br>
                     <select id="hosting" name="hosting">
+                        <option value="" selected>Select Hosting:</option>  
                         <option value="yes">Yes</option>
                         <option value="no">No</option>
                     </select>
@@ -28,6 +31,66 @@
             </form>
         </div>
         <style>
+            body {
+                font-family: monospace;
+                font-size: 16px;
+                background-color: #f2f2f2;
+                background: linear-gradient(to bottom, #bbbbbb, #ffffff);
+                color: black;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                font-weight: medium;
+            }
+    
+            .form1 {
+                font-family: monospace;
+                background-color: white;
+                border-radius: 35px;
+                padding: 20px;
+            }
+    
+            .textboxes, .multipleoption, .submit {
+                font-family: monospace;
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 10px;
+                outline: none;
+            }
+            
+    
+            label {
+                font-family: monospace;
+                margin-bottom: 5px;
+            }
+    
+            input[type="text"]{
+                font-family: monospace;
+                padding: 5px;
+                border-radius: 9px;
+                border: none;
+                border-bottom: 1px solid black;
+                outline: none;
+            }
+    
+            input[type="submit"] {
+  font-family: monospace;
+  padding: 8px 8px;
+  background-color: #802020;
+  color: white;
+  border: none;
+  border-bottom: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 200px; /* Adjust the width to your desired value */
+  margin-top: 20px; /* Adjust the margin-top to move the button down */
+  align-self: center;
+}
+input[type="submit"]:hover {
+  opacity: 0.9; /* Adjust the opacity as desired for the hover effect */
+}
+
         </style>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
